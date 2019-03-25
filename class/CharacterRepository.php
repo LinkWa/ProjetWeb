@@ -83,6 +83,26 @@ public function add(Character $character)
         return false;
     }
 
+    public function updateHp(Character $character)
+    {
+        $response = $this->base->prepare('UPDATE characters SET hp = :hp WHERE id = :id');
+
+        $response->bindValue(':hp', $character->getHp(), PDO::PARAM_INT);
+        $response->bindValue(':id', $character->getId(), PDO::PARAM_INT);
+
+        $response->execute();
+    }
+
+    public function updateAp(Character $character)
+    {
+      $response = $this->base->prepare('UPDATE characters SET ap = :ap WHERE id = :id');
+
+      $response->bindValue(':ap',$character->getAp(), PDO::PARAM_INT);
+      $responce->bindValue(':id', $character->getId(), PDO::PARAM_INT);
+
+      $responce->execute();
+    }
+
   }
 
 

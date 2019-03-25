@@ -1,6 +1,15 @@
 <?php
 class Character
 {
+    public const ALIVE = 'alive';
+
+    public const DEAD = 'dead';
+
+    public const ATTAQUE_COST = 5;
+
+    public const AP_REGEN = 60;
+
+    public const AP_MAX = 20;
 
     private $id;
 
@@ -80,5 +89,13 @@ class Character
                 $this->$method($value);
             }
         }
+    }
+
+    public function getState()
+    {
+        if ($this->hp < 0) {
+            return self::DEAD;
+        }
+        return self::ALIVE;
     }
 }
