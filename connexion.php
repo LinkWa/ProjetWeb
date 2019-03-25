@@ -1,4 +1,9 @@
 <?php
+require __DIR__.'/header.php';
+?>
+
+
+<?php
 if (isset($_SESSION['id'])) {
     echo "Vous êtes déjà connecter";
 } else {

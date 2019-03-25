@@ -12,7 +12,7 @@ class Character
 
     private $password;
 
-    public function __construct(?array $arrayOfValues)
+    public function __construct(array $arrayOfValues = null)
    {
        if ($arrayOfValues !== null) {
            $this->hydrate($arrayOfValues);

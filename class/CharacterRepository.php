@@ -70,6 +70,19 @@ public function add(Character $character)
 
     }
 
+    public function findAllWithoutMe(int $id)
+    {
+        $response = $this->base->prepare('SELECT * FROM characters WHERE id <> :id');
+        $response->bindValue(':id', $id);
+        $result = $response->execute();
+        if ($result === true) {
+            $records = $response->fetchAll(PDO::FETCH_CLASS, 'Character');
+            return $records;
+        }
+
+        return false;
+    }
+
   }
 
 
