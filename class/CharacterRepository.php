@@ -24,13 +24,13 @@ public function add(Character $character)
     }
 
     public function exists(Character $character)
-    {
-      $reponse = $this->base->prepare('SELECT COUNT(*) FROM characters WHERE name = :name');
-      $reponse->bindValue(':name',$character->getName());
-      $reponse->execute();
+   {
+       $response = $this->base->prepare('SELECT COUNT(*) FROM characters WHERE name = :name');
+       $response->bindValue(':name', $character->getName());
+       $response->execute();
 
-      return (bool) $reponse->fetchColumn();
-    }
+       return (bool) $response->fetchColumn();
+   }
 
     public function findByName(string $name)
    {
@@ -40,6 +40,35 @@ public function add(Character $character)
 
        return $response->fetch();
    }
+
+   public function login(string $name, string $password)
+    {
+        if ($result = $this->findByName($name)) {
+            if (password_verify($password, $result['password'])) {
+                $character = $this->find($result['id']);
+                $_SESSION['id'] = $character->getId();
+                $_SESSION['username'] =  $character->getName();
+                return $character;
+            }
+            return false;
+        }
+        return false;
+
+    }
+
+    public function find(int $id)
+    {
+        $response = $this->base->prepare('SELECT * FROM characters WHERE id = :id');
+        $response->bindValue(':id', $id);
+        $result = $response->execute();
+        if ($result === true) {
+            $character = new Character($response->fetch());
+            return $character;
+        }
+
+        return false;
+
+    }
 
   }
 

@@ -1,10 +1,18 @@
-<form method='post'>
-    <label>Nom</label>
-    <input type="text" name="name">
-    <label>Password</label>
-    <input type="password" name="password">
-    <button type="submit">Connexion</button>
-</form>
+<?php
+if (isset($_SESSION['id'])) {
+    echo "Vous êtes déjà connecter";
+} else {
+    ?>
+    <form method='post'>
+        <label>Nom</label>
+        <input type="text" name="name">
+        <label>Password</label>
+        <input type="password" name="password">
+        <button type="submit">Connexion</button>
+    </form>
+    <?php
+}
+?>
 
 <?php
 if (isset($_POST['name']) && isset($_POST['password'])) {
