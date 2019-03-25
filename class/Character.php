@@ -21,6 +21,8 @@ class Character
 
     private $password;
 
+    private $lastaction;
+
     public function __construct(array $arrayOfValues = null)
    {
        if ($arrayOfValues !== null) {
@@ -76,6 +78,14 @@ class Character
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    public function getLastaction(){
+      return $this->$lastaction;
+    }
+
+    public function setLastaction($lastaction){
+      $this->lastaction = $lastaction;
     }
 
     public function hydrate(array $donnees)

@@ -23,5 +23,5 @@ $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
   </head>
   <body>
     <?php
-      include("menu.php");
+    include("menu.php");
      ?>
