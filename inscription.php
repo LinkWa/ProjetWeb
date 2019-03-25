@@ -20,7 +20,17 @@
               'ap' => '10'
       ]);
 
+
+
       $characterRepository = new CharacterRepository($base);
-      $characterRepository->add($character);
+
+      if ($characterRepository->exists($character) === false) {
+        $characterRepository->add($character);
+        echo "Votre personnage est bien créé";
+      }
+      else {
+        echo "Un personnage du même nom existe";
+      }
+      
     }
 ?>

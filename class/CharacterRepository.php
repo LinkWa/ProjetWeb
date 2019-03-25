@@ -8,7 +8,7 @@ class CharacterRepository
         $this->base = $base;
     }
 
-}
+
 
 public function add(Character $character)
     {
@@ -31,5 +31,9 @@ public function add(Character $character)
 
       return (bool) $reponse->fetchColumn();
     }
+
+  }
+
+
 
 ?>
