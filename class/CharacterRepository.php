@@ -32,6 +32,15 @@ public function add(Character $character)
       return (bool) $reponse->fetchColumn();
     }
 
+    public function findByName(string $name)
+   {
+       $response = $this->base->prepare('SELECT * FROM characters WHERE name = :name');
+       $response->bindValue(':name', $name);
+       $response->execute();
+
+       return $response->fetch();
+   }
+
   }
 
 
