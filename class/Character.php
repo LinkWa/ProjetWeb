@@ -108,4 +108,16 @@ class Character
         }
         return self::ALIVE;
     }
+
+    public function getNewAp()
+    {
+        $datetime1 = new DateTime('now');
+        $datetime2 = new DateTime($this->lastaction);
+        $interval = $datetime1->diff($datetime2);
+        $seconde = $interval->s + $interval->i * 60 + $interval->h * 60 * 60;
+        if ($seconde > self::AP_REGEN) {
+            $newAP = floor($seconde / self::AP_REGEN);
+            $this->ap = $this->ap + $newAP;
+        }
+    }
 }

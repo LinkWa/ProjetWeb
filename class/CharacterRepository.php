@@ -18,6 +18,7 @@ public function add(Character $character)
         $response->bindValue(':hp', $character->getHp());
         $response->bindValue(':ap', $character->getAp());
 
+
         $response->execute();
 
         $character->hydrate(['id' => $this->base->lastInsertId()]);
@@ -48,6 +49,9 @@ public function add(Character $character)
                 $character = $this->find($result['id']);
                 $_SESSION['id'] = $character->getId();
                 $_SESSION['username'] =  $character->getName();
+                $character->getNewAp();
+                $this->updateLastActionAndAp($character);
+
                 return $character;
             }
             return false;
@@ -101,6 +105,17 @@ public function add(Character $character)
       $responce->bindValue(':id', $character->getId(), PDO::PARAM_INT);
 
       $responce->execute();
+    }
+
+    public function updateLastActionAndAp(Character $character)
+    {
+        $datenow = new DateTime('now');
+        $response = $this->base->prepare('UPDATE characters SET lastaction = :lastaction, ap = :ap WHERE id = :id');
+        $response->bindValue(':lastaction', $datenow->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+        $response->bindValue(':ap', $character->getAp(), PDO::PARAM_INT);
+        $response->bindValue(':id', $character->getId(), PDO::PARAM_INT);
+
+        $response->execute();
     }
 
   }
