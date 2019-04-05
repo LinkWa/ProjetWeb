@@ -2,6 +2,8 @@
 
 namespace App;
 
+use DateTime;
+
 class Character
 {
     public const ALIVE = 'alive';

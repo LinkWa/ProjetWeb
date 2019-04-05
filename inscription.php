@@ -20,7 +20,9 @@
               'name' => $_POST['name'],
               'password' => password_hash($_POST['password'], PASSWORD_ARGON2I),
               'hp' => '100',
-              'ap' => '10'
+              'ap' => '10',
+              'level' => '1',
+              'experience' => '0'
       ]);
 
 

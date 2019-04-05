@@ -2,6 +2,10 @@
 
 namespace App;
 
+use PDO;
+use DateTime;
+use App\Character;
+
 class CharacterRepository
 {
     private $base;
@@ -15,11 +19,13 @@ class CharacterRepository
 
 public function add(Character $character)
     {
-        $response = $this->base->prepare('INSERT INTO characters (name, password, hp, ap) VALUES(:name, :password, :hp, :ap)');
+        $response = $this->base->prepare('INSERT INTO characters (name, password, hp, ap, level, experience) VALUES(:name, :password, :hp, :ap ,:level ,:experience)');
         $response->bindValue(':name', $character->getName());
         $response->bindValue(':password', $character->getPassword());
         $response->bindValue(':hp', $character->getHp());
         $response->bindValue(':ap', $character->getAp());
+        $response->bindValue('level',$character->getLevel());
+        $response->bindValue('experience',$character->getExperience());
 
 
         $response->execute();
@@ -83,7 +89,7 @@ public function add(Character $character)
         $response->bindValue(':id', $id);
         $result = $response->execute();
         if ($result === true) {
-            $records = $response->fetchAll(PDO::FETCH_CLASS, 'Character');
+            $records = $response->fetchAll(PDO::FETCH_CLASS, 'App\Character');
             return $records;
         }
 

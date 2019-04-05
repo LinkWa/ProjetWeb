@@ -1,12 +1,14 @@
 <?php
 require __DIR__.'/header.php';
 
+use App\CharacterRepository;
+
 
 if (isset($_SESSION['id'])) {
     $characterRepository = new CharacterRepository($base);
     $character = $characterRepository->find($_SESSION['id']);
     ?>
-    
+
     <?php
 
     $listOfCharacter = $characterRepository->findAllWithoutMe($_SESSION['id']);
