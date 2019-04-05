@@ -22,7 +22,14 @@ if (isset($_SESSION['id'])) {
             $enemy->setHp($hp);
             $characterRepository->updateHp($enemy);
 
-            echo $myCharacter->getName() . " attaque ". $enemy->getName(). " pour " . $damage ." de dommage <br>";
+            $message = $myCharacter->getName() . " attaque ". $enemy->getName(). " pour " . $damage ." de dommage <br>";
+            // J'enregistre les logs dans chaques journal
+            $characterLogRepository = new CharacterLogRepository($base);
+            $characterLogRepository->add($myCharacter, $message);
+            $characterLogRepository->add($enemy, $message);
+
+            echo $message;
+
             if ($enemy->getState() === Character::DEAD) {
                 echo $enemy->getName(). " est mort";
             }
