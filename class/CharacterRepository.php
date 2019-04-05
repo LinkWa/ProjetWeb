@@ -87,24 +87,18 @@ public function add(Character $character)
         return false;
     }
 
-    public function updateHp(Character $character)
-    {
-        $response = $this->base->prepare('UPDATE characters SET hp = :hp WHERE id = :id');
 
+
+    public function update(Character $character)
+    {
+        $character->checkExperience();
+        $response = $this->base->prepare('UPDATE characters SET hp = :hp, ap = :ap, experience = :experience, level = :level WHERE id = :id');
+        $response->bindValue(':ap', $character->getAp(), PDO::PARAM_INT);
+        $response->bindValue(':experience', $character->getExperience(), PDO::PARAM_INT);
         $response->bindValue(':hp', $character->getHp(), PDO::PARAM_INT);
+        $response->bindValue(':level', $character->getLevel(), PDO::PARAM_INT);
         $response->bindValue(':id', $character->getId(), PDO::PARAM_INT);
-
         $response->execute();
-    }
-
-    public function updateAp(Character $character)
-    {
-      $response = $this->base->prepare('UPDATE characters SET ap = :ap WHERE id = :id');
-
-      $response->bindValue(':ap',$character->getAp(), PDO::PARAM_INT);
-      $response->bindValue(':id', $character->getId(), PDO::PARAM_INT);
-
-      $response->execute();
     }
 
     public function updateLastActionAndAp(Character $character)
