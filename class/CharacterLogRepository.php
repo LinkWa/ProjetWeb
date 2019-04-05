@@ -1,5 +1,8 @@
 <?php
 
+namespace App;
+
+
 class CharacterLogRepository
 {
     private $base;

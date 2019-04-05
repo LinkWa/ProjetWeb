@@ -1,5 +1,8 @@
 <?php
   require __DIR__.'/header.php';
+
+  use App\Character;
+  use App\CharacterRepository;
  ?>
 
  <form method="post">
@@ -31,6 +34,6 @@
       else {
         echo "Un personnage du même nom existe";
       }
-      
+
     }
 ?>

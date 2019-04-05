@@ -1,4 +1,7 @@
 <?php
+
+namespace App;
+
 class CharacterRepository
 {
     private $base;

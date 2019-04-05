@@ -1,4 +1,7 @@
 <?php
+
+  namespace App;
+
   class CharacterLog {
     private $id;
     private $message;

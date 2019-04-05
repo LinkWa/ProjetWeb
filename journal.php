@@ -1,5 +1,6 @@
 <?php
 require __DIR__.'/header.php';
+use App\CharacterLogRepository;
 
 
 if (isset($_SESSION['id'])) {

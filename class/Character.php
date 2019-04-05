@@ -1,4 +1,7 @@
 <?php
+
+namespace App;
+
 class Character
 {
     public const ALIVE = 'alive';
