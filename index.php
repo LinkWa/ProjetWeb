@@ -8,15 +8,15 @@ if (isset($_SESSION['id'])) {
     ?>
     <table>
         <tr>
-            <th>Nom du joueur</th>
+            <th>Nom du joueur : </th>
             <td><?= $character->getName(); ?></td>
         </tr>
         <tr>
-            <th>Point de vie</th>
+            <th>Point de vie : </th>
             <td><?= $character->getHp(); ?></td>
         </tr>
         <tr>
-            <th>Point d'action</th>
+            <th>Point d'action : </th>
             <td><?= $character->getAp(); ?></td>
         </tr>
     </table>
@@ -24,7 +24,7 @@ if (isset($_SESSION['id'])) {
 
     $listOfCharacter = $characterRepository->findAllWithoutMe($_SESSION['id']);
     foreach ($listOfCharacter as $character):?>
-        <a href="attaque.php?id=<?= $character->getId();?>"><?= $character->getName();?></a><br>
+      <?= $character->getName();?> : Action disponible <a href="attaque.php?id=<?= $character->getId();?>">Attaque</a> - <a href="heal.php?id=<?= $character->getId();?>">Soin</a><br>
     <?php endforeach;
 }
 
